@@ -180,7 +180,7 @@ class MY_Model extends CI_Model{
         return $req->result();
         
     }
-    
+   
     public function Astreintes_ville($dir, $dept, $ser, $vil){
         $this->db->select('date_deb, date_fin, libelle, nom, prenom, tel1, email, matricule');
         $this->db->from('Utilisateurs');

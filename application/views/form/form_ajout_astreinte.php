@@ -1,6 +1,24 @@
 <div id="testmodal2" style="padding: 5px 20px;">
     <form id="antoform2" class="form-horizontal calender" role="form" method="POST" action="<?php echo base_url(); ?>responsable/creer_astr">
         <div class="form-group">
+            <label class="col-sm-3 control-label">Service: </label>
+            <div class="col-sm-9">
+                <!--<input type="text" class="form-control" id="nom" name="nom">-->
+                <select id="service" name="service" class="form-control">
+                    <?php
+                        if(isset($services)){
+                            foreach($services as $v){
+                                echo '<option value="'.$v['id'].'">'; echo $v['nom_service'].'</option>';
+                            }
+                        }
+                        else{
+                            redirect('responsable/accueil_r', 'refresh');
+                        } 
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">Utilisateur: </label>
             <div class="col-sm-9">
                 <!--<input type="text" class="form-control" id="nom" name="nom">-->

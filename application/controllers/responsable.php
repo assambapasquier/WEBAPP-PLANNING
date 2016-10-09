@@ -33,6 +33,7 @@ class responsable extends CI_Controller{
         $this->load->model('plannif/villes_model'); 
         $this->load->model('utils/services_model'); 
         $this->load->model('utils/departements_model');
+        $this->load->model('utils/directions_model');
         
     }
     
@@ -96,7 +97,7 @@ class responsable extends CI_Controller{
     public function deconnexion(){
         $this->session->sess_destroy();
         $this->data['isLoggedIn'] = FALSE;
-        redirect('utilisateur', 'refresh');
+        redirect('responsable/accueil', 'refresh');
         exit;
     }
     
@@ -129,8 +130,15 @@ class responsable extends CI_Controller{
             
             $this->chargerSession();
             $this->chargerContext($this->data['service'], $this->data['departement'], $this->data['direction'], $this->data['matricule'], $this->data['mot_de_passe']);
-           
+            $this->chargerPersonnels($this->data['service'], $this->data['departement'], $this->data['direction']);
+            $this->chargerLieux();
+            $this->chargerServices($this->data['service'], $this->data['departement'], $this->data['direction']);
+            
             $this->chargerLignePerm($idperm);
+            
+            $this->data['idPerm'] = $idperm;
+            $this->session->set_userdata($this->data);
+            
             //var_dump($this->data['ligne_perm']);
             $this->load->view('permanences_r', $this->data);
         }
@@ -147,9 +155,11 @@ class responsable extends CI_Controller{
             $this->chargerPersonnels($this->data['service'], $this->data['departement'], $this->data['direction']);
             
             $this->chargerLieux();
+            $this->chargerServices($this->data['service'], $this->data['departement'], $this->data['direction']);
             
-            $result = $this->ligneAstrs_model->get(array('Services'=>$this->session->userdata('service'),
-            'Departements'=>$this->session->userdata('departement'), 'Directions'=>$this->session->userdata('direction')));
+            //var_dump($this->data['services']);
+            
+            $result = $this->ligneAstrs_model->get(array('Departements'=>$this->session->userdata('departement')));
             //var_dump($result);
             $astreintes[] = array();
             $taille = 0;
@@ -201,6 +211,37 @@ class responsable extends CI_Controller{
         }
     }
     
+    public function creer_ligne_perm(){
+        if(!$this->is_logged()){
+            $this->sign_in();
+        }
+        else{
+            
+            $this->form_validation->set_error_delimiters('<p style="color:red;">', '</p>');
+            $this->load->library('form_validation'); //pour la validation du formulaire
+            $this->form_validation->set_rules('date','"Date"','trim|required|encode_php_tags');
+            $this->form_validation->set_rules('personnel','"Personnel"','trim|required|encode_php_tags');
+            $this->form_validation->set_rules('h_deb','"H_deb"','trim|required|encode_php_tags');
+            $this->form_validation->set_rules('h_deb','"H_fin"','trim|required|encode_php_tags');
+        
+            if($this->form_validation->run()){
+                $date = $this->input->post('date');
+                $personnel = $this->input->post('personnel');
+                $h_deb = $this->input->post('h_deb');
+                $h_fin = $this->input->post('h_fin');
+                $idP = $this->session->userdata('idPerm');
+                
+                $result = $this->lignePerms_model->creer(array('date_perm'=>$date, 'Permanences'=>$idP));
+                $result2 = $this->lignePerms_Utilisateurs_model->creer(array('LignePerms'=>$result, 'matricule'=>$personnel, 'heure_deb'=>$h_deb, 'heure_fin'=>$h_fin));
+                redirect('responsable/permanences/'.$idP, 'refresh');
+
+            }
+            else{
+                redirect('responsable/permanences/'.$idP, 'refresh');
+            }
+           
+        }
+    }
     public function creer_astr(){
         if(!$this->is_logged()){
             $this->sign_in();
@@ -215,15 +256,19 @@ class responsable extends CI_Controller{
             $this->form_validation->set_rules('debut','"Debut"','trim|required|encode_php_tags');
             $this->form_validation->set_rules('fin','"Fin"','trim|required|encode_php_tags');
             $this->form_validation->set_rules('lieu','"Lieu"','trim|required|encode_php_tags');
+            $this->form_validation->set_rules('service','"Service"','trim|required|encode_php_tags');
         
             if($this->form_validation->run()){
                 $matricule = $this->input->post('personnel');
                 $date_deb = $this->input->post('debut');
                 $date_fin = $this->input->post('fin');
                 $lieu = $this->input->post('lieu');
+                $service = $this->input->post('service');
+                
+                $dir = $this->getDirection($service);
                 $result = $this->ligneAstrs_model->creer(array('date_deb'=>$date_deb, 'date_fin'=>$date_fin,
-                    'Lieu'=>$lieu, 'Utilisateurs'=>$matricule, 'Services'=>$this->data['service'], 
-                    'Departements'=>$this->data['departement'], 'Directions'=>$this->data['direction']));
+                    'Lieu'=>$lieu, 'Utilisateurs'=>$matricule, 'Services'=>$service, 'Departements'=>$this->data['departement'],
+                    'Directions'=>$dir));
                 
                  redirect('responsable/astreintes', 'refresh');
             }
@@ -596,5 +641,13 @@ class responsable extends CI_Controller{
         );
         
         $this->data['context'] = $context;
+    }
+    
+    protected function getDirection($service){
+        //$nom = '';
+        $result = $this->services_model->get(array('id'=>$service));
+        $idDir = $result[0]->Directions;
+        
+        return $idDir;
     }
 }

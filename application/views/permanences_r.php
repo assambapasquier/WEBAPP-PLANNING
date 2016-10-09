@@ -162,7 +162,7 @@
                                         <h2><?php if($ligne_perm[0]!=array()) echo '<span style="color:red">'.$ligne_perm[0]['libperm'].'</span> : Tableau des lignes permanence'; 
                                             else redirect('responsable/accueil_r', 'refresh');
                                         ?> </h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button type="button" data-toggle="modal" data-target="#NewPerm" class="fa fa-plus btn btn-warning">&nbsp;Nouvelle Ligne de Permanence</button>
+                                                        <button type="button" data-toggle="modal" data-target="#NewLignePerm" class="fa fa-plus btn btn-warning">&nbsp;Nouvelle Ligne de Permanence</button>
 
                                         <div class="clearfix"></div>
                                     </div>
@@ -193,28 +193,26 @@
                 <!-- /footer content -->
             </div>
 			
-			<div class="modal fade info_perso" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
+            <div id="NewLignePerm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title" id="myModalLabel"><span style="color:rgb(0,132,232);"> Ajout d'une permanence</span></h4>
+                            </div>
+                            
+                            <div class="modal-body">
+                                    <?php include('form/ajout_ligne_perm.php'); ?>
 
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel2">Modal title</h4>
-						</div>
-						<div class="modal-body">
-							<h4>Text in a modal</h4>
-							<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-							<p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-
-					</div>
-				</div>
-			</div>
+                                <!----end modal body-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Fermer</button>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <!-- /page content -->
 
     <!--<div id="custom_notifications" class="custom-notifications dsp_none">
@@ -437,7 +435,7 @@
             $(document).ready(function () {
                 var oTable = $('#example').dataTable({
                     "oLanguage": {
-                        "sSearch": "Search all columns:"
+                        "sSearch": "Filtrer:"
                     },
                     "aoColumnDefs": [
                         {

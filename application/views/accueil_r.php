@@ -527,7 +527,7 @@
             $(document).ready(function () {
                 var oTable = $('#example').dataTable({
                     "oLanguage": {
-                        "sSearch": "Rechercher un nom:"
+                        "sSearch": "Filtrer:"
                     },
                     "aoColumnDefs": [
                         {

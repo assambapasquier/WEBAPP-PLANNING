@@ -225,7 +225,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Fermer</button>
-                                <button type="button" class="btn btn-primary antosubmit2">Ajouter</button>
+                                
                             </div>
                         </div>
                     </div>

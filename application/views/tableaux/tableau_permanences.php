@@ -24,7 +24,7 @@
                             . '<td class=" ">'.$v1['libelle'].'</td>'
 
                             . '<td class="last">
-                        <a href="'.base_url().'responsable/permanences/1" class="btn btn-link voir" title="consulter"><i class="fa fa-eye"></i></a>
+                        <a href="'.base_url().'responsable/permanences/'.$v1['id'].'" class="btn btn-link voir" title="consulter"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-link edition" title="modifier"><i class="fa fa-edit"></i></a>
                         <a class="btn btn-link suppr" title="supprimer"><i class="fa fa-times"></i></a>
                         </td>
