@@ -17,7 +17,7 @@ class responsable extends CI_Controller{
     //put your code here
     function __construct() {  
         parent::__construct(); //obligatoire
-        /*chargement des modèle utiles*/
+        /*chargement des modèle utiles ici*/
         
         $this->load->model('utils/responsables_model');  
         $this->load->model('utils/roles_model');  

@@ -86,7 +86,7 @@ class MY_Model extends CI_Model{
         return $req->result();
     }
     
-    public function permanencesDept_ville($dept, $vil, $start, $end){
+    public function permanencesDept_ville($dept, $vil, $start, $end, $service){
         $this->db->select('date_perm, nom, prenom, tel1, email, heure_deb, heure_fin');
         $this->db->from('Permanences');
         $this->db->join('LignePerms', 'Ligneperms.Permanences = Permanences.id');
@@ -97,11 +97,15 @@ class MY_Model extends CI_Model{
         $this->db->where(array('LignePerms.date_perm >='=>$start));
         $this->db->where(array('LignePerms.date_perm <='=>$end));
         
+        if($service!=null){
+           $this->db->where(array('Utilisateurs.Services'=>$service)); 
+        }
+        
         $req = $this->db->get();
         return $req->result();
     }
     
-    public function permanences($dir, $dept, $ser, $vil){
+    /*public function permanences($dir, $dept, $ser, $vil){
         if($vil==null){
             if($ser==null){
                 $this->db->select('date_perm, nom, prenom, tel1, email, heure_deb, heure_fin');
@@ -147,7 +151,7 @@ class MY_Model extends CI_Model{
         
         $req = $this->db->get();
         return $req->result();
-    }
+    }*/
     
     public function AllAstreintes(){
         $this->db->select('date_deb, date_fin, libelle, nom, prenom, tel1, email, matricule');
@@ -159,14 +163,19 @@ class MY_Model extends CI_Model{
         return $req->result();
     }
     
-    public function AstreintesDept_ville($dept, $vil){
-        $this->db->select('date_deb, date_fin, libelle, nom, prenom, tel1, email, matricule');
+    public function AstreintesDept_ville($dept, $vil, $start, $end, $service){
+        $this->db->select('date_deb, date_fin, Lieu.libelle AS lieu, nom, prenom, tel1, email, matricule');
         $this->db->from('Utilisateurs');
         $this->db->join('LigneAstrs', 'LigneAstrs.Utilisateurs = Utilisateurs.matricule');
         $this->db->join('Villes', 'Utilisateurs.Villes = Villes.id');
         $this->db->join('Lieu', 'LigneAstrs.Lieu = Lieu.id');
-        $this->db->where(array('LigneAstrs.Departements'=>$dept, 'Villes.id'=>$vil));
+        $this->db->where(array('LigneAstrs.Departements'=>$dept,'Villes.id'=>$vil));
+        $this->db->where(array('LigneAstrs.date_deb'=>$start));
         
+        if($service!=null){
+           $this->db->where(array('LigneAstrs.Services'=>$service)); 
+        }
+
         $req = $this->db->get();
         return $req->result();
         

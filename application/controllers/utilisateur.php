@@ -37,18 +37,19 @@ class Utilisateur extends CI_Controller{
     
     public function index($error=''){
         //on affiche le formulaire de recherche en principe (service, ville, permanence, astreinte...)
-        $this->chargerDepartements();
-        $this->chargerDirections();
-        $this->chargerServices();
-        $this->chargerVilles();
+        //$this->chargerDepartements();
+        //$this->chargerDirections();
+        //$this->chargerServices();
+        //$this->chargerVilles();
         $this->data['error'] = $error;
         $this->load->view('utils/page_accueil', $this->data); 
     }
     
     public function recherche_a($error=''){
+        $cond = array();
         $this->chargerDepartements();
         $this->chargerDirections();
-        $this->chargerServices();
+        $this->chargerServices($cond);
         $this->chargerVilles();
         $this->data['error'] = $error;
         $this->load->view('utils/form_recherche', $this->data);   
@@ -128,60 +129,121 @@ class Utilisateur extends CI_Controller{
         $this->load->view('accueil_u', $this->data);
     }
     
-    public function permanence($id='', $start='', $end=''){
-        $this->chargerSession();
-        $this->data['dept_id'] = $id;
-        $this->session->set_userdata($this->data);
-        
-        //$this->chargerPermanences($this->data['dir'], $this->data['dept'], $this->data['ser'], $this->data['vil']);
-        if($start==null || $end==null){
-            $now = new DateTime();
-            $start = date_format(new DateTime(), 'Y-m-d');
-            $end = $now->add(new DateInterval('P1W'))->format('Y-m-d');
-            $this->data['startdate'] = $start;
-            $this->data['enddate'] = $end;
-            
-            $this->chargerPermanences(null, $id, null, $this->data['f1']['villef1'][0]['id'], $start, $end);
-            $this->load->view('permanences_u', $this->data);
+    public function permanence($id='', $start='', $end='', $service=''){
+        if($id!=null){
+            $this->chargerSession();
+            $this->data['dept_id'] = $id;
+            $this->session->set_userdata($this->data);
+            $cond = array('Departements'=>$id);
+            $this->chargerServices($cond);
+            //var_dump($this->data['services']);
+            $this->data['nom_dept'] = $this->getNomDept($id);
+
+            //$this->chargerPermanences($this->data['dir'], $this->data['dept'], $this->data['ser'], $this->data['vil']);
+            if($start==null || $end==null){
+                //echo 'hey';
+                $now = new DateTime();
+                $start = date_format(new DateTime(), 'Y-m-d');
+                $end = $now->add(new DateInterval('P1W'))->format('Y-m-d');
+                $this->data['startdate'] = $start;
+                $this->data['enddate'] = $end;
+
+                $this->chargerPermanences(null, $id, null, $this->data['f1']['villef1'][0]['id'], $start, $end, $service);
+                $this->load->view('permanences_u', $this->data);
+            }
+            else{
+                $this->data['startdate'] = $start;
+                $this->data['enddate'] = $end;
+                $this->chargerPermanences(null, $id, null, $this->data['f1']['villef1'][0]['id'], $start, $end, $service);
+                $this->load->view('permanences_u', $this->data);
+            }
         }
         else{
-            $this->data['startdate'] = $start;
-            $this->data['enddate'] = $end;
-            $this->chargerPermanences(null, $id, null, $this->data['f1']['villef1'][0]['id'], $start, $end);
-            $this->load->view('permanences_u', $this->data);
+            redirect('', 'refresh');
         }
-        
         
         //var_dump($this->data['permChoisies']);
     }
     
-    public function traitement_filtre(){
+    public function traitement_filtre_perm(){
         $this->chargerSession();
         $this->form_validation->set_error_delimiters('<p style="color:red;">', '</p>');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('intervalle','"Intervalle"','encode_php_tags');
+        $this->form_validation->set_rules('service','"Service"','encode_php_tags');
         if($this->form_validation->run())
         {   
             $intervalle = $this->input->post('intervalle');
+            $service = $this->input->post('service');
             $date = explode('-', $intervalle);
             $start = date("Y-m-d", strtotime($date[0]));
             $end = date("Y-m-d", strtotime($date[1]));
             
             //$this->permanence($id, $start, $end);
-            redirect('utilisateur/permanence/'.$this->data['dept_id'].'/'.$start.'/'.$end, 'refresh');
+            redirect('utilisateur/permanence/'.$this->data['dept_id'].'/'.$start.'/'.$end.'/'.$service, 'refresh');
         }
         else{
             echo'<div class="alert alert-dismissable alert-danger"><small>'. validation_errors().'</small></div>';
         }
     }
     
-    public function astreinte($id=''){
+    public function astreinte($id='', $start='', $end='', $service=''){
+        if($id!=null){
+            $this->chargerSession();
+            $this->data['dept_id'] = $id;
+            $this->session->set_userdata($this->data);
+            $cond = array('Departements'=>$id);
+            $this->chargerServices($cond);
+            //var_dump($this->data['services']);
+            $this->data['nom_dept'] = $this->getNomDept($id);
+
+            //$this->chargerPermanences($this->data['dir'], $this->data['dept'], $this->data['ser'], $this->data['vil']);
+            if($start==null || $end==null){
+                //echo 'hey';
+                $now = new DateTime();
+                $start = date_format(new DateTime(), 'Y-m-d');
+                $end = $now->add(new DateInterval('P1W'))->format('Y-m-d');
+                $this->data['startdate'] = $start;
+                $this->data['enddate'] = $end;
+
+                $this->chargerAstreintes(null, $id, null, $this->data['f1']['villef1'][0]['id'], $start, $end, $service);
+                $this->load->view('astreintes_u', $this->data);
+            }
+            else{
+                $this->data['startdate'] = $start;
+                $this->data['enddate'] = $end;
+                $this->chargerAstreintes(null, $id, null, $this->data['f1']['villef1'][0]['id'], $start, $end, $service);
+                $this->load->view('astreintes_u', $this->data);
+            }
+
+
+            //var_dump($this->data['astrChoisies']);
+        }
+        else{
+            redirect('', 'refresh');
+        }
+    }
+    
+    public function traitement_filtre_astr(){
         $this->chargerSession();
-        $this->chargerAstreintes(null, $id, null, $this->data['f1']['villef1'][0]['id']);
-        echo 'astreintes du departement '.$id.'<br/>';
-        echo '------------------------------------------';
-        var_dump($this->data['astreintesChoisies']);
-        //$this->load->view('astreintes_u', $this->data);
+        $this->form_validation->set_error_delimiters('<p style="color:red;">', '</p>');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('intervalle','"Intervalle"','encode_php_tags');
+        $this->form_validation->set_rules('service','"Service"','encode_php_tags');
+        if($this->form_validation->run())
+        {   
+            $intervalle = $this->input->post('intervalle');
+            $service = $this->input->post('service');
+            $date = explode('-', $intervalle);
+            $start = date("Y-m-d", strtotime($date[0]));
+            $end = date("Y-m-d", strtotime($date[1]));
+            
+            //$this->permanence($id, $start, $end);
+            redirect('utilisateur/astreinte/'.$this->data['dept_id'].'/'.$start.'/'.$end.'/'.$service, 'refresh');
+        }
+        else{
+            echo'<div class="alert alert-dismissable alert-danger"><small>'. validation_errors().'</small></div>';
+        }
     }
     
     protected function chargerSession(){
@@ -199,9 +261,15 @@ class Utilisateur extends CI_Controller{
     /**************************************************************************************************************/
     /***************************************************************************************************************/
     
-    protected function chargerServices(){
+    protected function chargerServices($cond){
         $services[] = array();
-        $result = $this->services_model->getAll();
+        if($cond == array()){
+            $result = $this->services_model->getAll();
+        }
+        else{
+            $result = $this->services_model->get($cond);
+        }
+        
         $taille = 0;
         foreach ($result as $row){
                $services[$taille] = array('id'=>$row->id, 'nom_service'=>$row->nom_service, 'Departements'=>$row->Departements, 'Directions'=>$row->Directions);
@@ -247,7 +315,7 @@ class Utilisateur extends CI_Controller{
         
     }
     
-    public function chargerPermanences($dir, $dept, $ser, $vil, $start, $end){
+    protected function chargerPermanences($dir, $dept, $ser, $vil, $start, $end, $service){
         if($dir=='0'){$dir=null;}
         if($dept=='0'){$dept=null;}
         if($ser=='0'){$ser=null;}
@@ -255,7 +323,7 @@ class Utilisateur extends CI_Controller{
         
         $permanences[] = array();
         $result[] = array();
-        $result = $this->permanences_model->permanencesDept_ville($dept, $vil, $start, $end);
+        $result = $this->permanences_model->permanencesDept_ville($dept, $vil, $start, $end, $service);
         
         /*if($dir==null && $dept==null && $ser==null && $vil==null){//toutes les permanences dans toutes les villes
             $result = $this->permanences_model->AllLigne_perm();
@@ -277,49 +345,35 @@ class Utilisateur extends CI_Controller{
         $this->data['permChoisies'] = $permanences;
     }
     
-    public function chargerAstreintes($dir, $dept, $ser, $vil){
+    protected function chargerAstreintes($dir, $dept, $ser, $vil, $start, $end, $service){
         if($dir=='0'){$dir=null;}
         if($dept=='0'){$dept=null;}
         if($ser=='0'){$ser=null;}
         if($vil=='0'){$vil=null;}
         
         $astreintes[] = array();
-        $result = $this->ligneAstrs_model->AstreintesDept_ville($dept,$vil);
-        $taille = 0;
-        foreach ($result as $row){
-               $astreintes[$taille] = array('date_deb'=>$row->date_deb, 'date_fin'=>$row->date_fin,
-                   'libelle'=>$row->libelle, 'nom'=>$row->nom, 'prenom'=>$row->prenom, 'tel1'=>$row->tel1,
-                   'email'=>$row->email);
-               $taille = $taille+1;  
-        }
-        $this->data['astreintesChoisies'] = $astreintes;
+        $result[] = array();
+        $result = $this->ligneAstrs_model->astreintesDept_ville($dept, $vil, $start, $end, $service);
         
-        /*if($dir==null && $dept==null && $ser==null && $vil==null){
-            $astreintes[] = array();
-            $result = $this->ligneAstrs_model->AllAstreintes();
-            $taille = 0;
-            foreach ($result as $row){
-                   $astreintes[$taille] = array('date_deb'=>$row->date_deb, 'date_fin'=>$row->date_fin,
-                       'libelle'=>$row->libelle, 'nom'=>$row->nom, 'prenom'=>$row->prenom, 'tel1'=>$row->tel1,
-                       'email'=>$row->email);
-                   $taille = $taille+1;  
-            }
-            $this->data['astreintesChoisies'] = $astreintes;
+        /*if($dir==null && $dept==null && $ser==null && $vil==null){//toutes les permanences dans toutes les villes
+            $result = $this->permanences_model->AllLigne_perm();
+        }
+        elseif($dir==null && $dept!=null && $ser==null && $vil!=null){//permanences d'un departement dans la ville X
+            $result = $this->permanences_model->permanencesDept_ville($dept, $vil);
         }
         else{
-            $astreintes[] = array();
-            //$result = $this->ligneAstrs_model->astreintes($dir, $dept, $ser, $vil);
-            $result = $this->ligneAstrs_model->Astreintes_ville($dir, $dept, $ser, $vil);
-            //$result = $this->ligneAstrs_model->AllAstreintes();
-            $taille = 0;
-            foreach ($result as $row){
-                   $astreintes[$taille] = array('date_deb'=>$row->date_deb, 'date_fin'=>$row->date_fin,
-                       'libelle'=>$row->libelle, 'nom'=>$row->nom, 'prenom'=>$row->prenom, 'tel1'=>$row->tel1,
-                       'email'=>$row->email);
-                   $taille = $taille+1;  
-            }
-            $this->data['astreintesChoisies'] = $astreintes;
+            $result = $this->permanences_model->permanences($dir, $dept, $ser, $vil);
         }*/
+        
+        $taille = 0;
+        foreach ($result as $row){
+            $astreintes[$taille] = array('date_deb'=>$row->date_deb, 'date_fin'=>$row->date_fin, 
+                'lieu'=>$row->lieu, 'nom'=>$row->nom, 'prenom'=>$row->prenom,
+                'tel1'=>$row->tel1, 'email'=>$row->email, 'matricule'=>$row->matricule);
+            $taille = $taille+1;  
+        }
+        $this->data['astrChoisies'] = $astreintes;
+        
     }
     
     protected function deptFiltre1($mc){
@@ -368,4 +422,12 @@ class Utilisateur extends CI_Controller{
         
     }
     
+    protected function getNomDept($id){
+        $nom='';
+        $result = $this->departements_model->get(array('id'=>$id));
+        if(is_array($result) && count($result) == 1){
+            $nom = $result[0]->libelle;
+        }
+        return $nom;
+    }
 }

@@ -69,6 +69,7 @@
                 <span class="glyphicon glyphicon-chevron-right"></span>
                 </a>
                 </div>
+                </div>
             </div>
 			
     <nav class="navbar navbar-findcond navbar-fixed-top">
@@ -133,7 +134,8 @@
 
                             <?php
                                 $trouve = false; $it=0;
-                                foreach($f1['deptf1'] as $v){
+                                if(isset($f1['deptf1'])){
+                                    foreach($f1['deptf1'] as $v){
                                     if($v != null){
                                         $trouve = true;
                                         if($it==0) {echo'<div class="alert alert-dismissable alert-success">Resultat de votre recherche</div>'; $it = $it+1;}
@@ -166,7 +168,10 @@
  
                                     }
                                 }//en foreach
-                                if(!$trouve) echo'<div class="alert alert-dismissable alert-danger">Aucune information trouvée pour votre recherche. Merci de reessayer avec d\'autres mot-clés</div>';
+                                    if(!$trouve) echo'<div class="alert alert-dismissable alert-danger">Aucune information trouvée pour votre recherche. Merci de reessayer avec d\'autres mot-clés</div>';
+                                }
+                                else header('Location:'.base_url().'utilisateur/');
+                                
                             ?>
 
                             

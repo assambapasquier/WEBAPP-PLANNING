@@ -133,29 +133,46 @@
                               <div class="x_panel">
                                 <div class="x_title">
                                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                        <h2>Liste du personnel de "<?php //echo $context['structure']; ?>"</h2> 
+                                        <h3>Planning hebdo de permanence: "<?php echo $nom_dept; ?>"</h3> 
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                        <form class="form-horizontal" method="POST" action="<?php echo base_url()?>utilisateur/traitement_filtre<?php echo '/'.$this->input->get('id');?>">
-                                            <label style="color:rgb(0,132,232);">Intervalle</label>
-                                            <fieldset>
-                                                <div class="control-group">
-                                                    <div class="controls">
-                                                        <div class="input-prepend input-group">
-                                                            <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                                                            <input type="text" style="width: 200px; background:rgb(0,132,200); color:white" name="intervalle" id="intervalle" class="form-control" value="<?php echo $startdate; ?> => <?php echo $enddate; ?>" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button type="submit" class="btn btn-warning">GO</button>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                                
+                                    
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                <?php include('tableaux/tableau_perm_choisies.php'); ?>
+                                    <div class="row">
+                                        <form method="POST" action="<?php echo base_url()?>utilisateur/traitement_filtre_perm<?php echo '/'.$this->input->get('id');?>">
+                                            <label style="color:rgb(0,132,232);">Choisir le Service</label>
+                                            <fieldset>
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                                                <select name="service" class="form-control">
+                                                                    <?php
+                                                                        foreach($services as $v){
+                                                                            if($v != null){
+                                                                                echo '<option value="'.$v['id'].'">'.$v['nom_service'].'</option>';
+                                                                            }
+                                                                        }//en foreach
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                                <div class="input-prepend input-group">
+
+                                                                    <input type="text" style="width: 200px; background:rgb(0,132,200); color:white" name="intervalle" id="intervalle" class="form-control" value="<?php echo $startdate; ?> => <?php echo $enddate; ?>" />
+                                                                    <button type="submit" class="btn btn-warning">GO</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div> 
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    
+                                    <?php include('tableaux/tableau_perm_choisies.php'); ?>
                                 </div>
                               </div>
                             </div>
