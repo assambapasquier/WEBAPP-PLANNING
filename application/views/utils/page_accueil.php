@@ -53,11 +53,23 @@
 			<div class="">
                     
                             <div class="clearfix"></div>
+
                             <!-- Home Section -->
                             <section id="home" class="tt-fullHeight" data-stellar-vertical-offset="50" data-stellar-background-ratio="0.2" style="height: 500px; background-position: 50% 0px;">
+                                    
+                                    <div id="background-carousel">
+                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                          <div class="carousel-inner">
+                                            <div class="item active" style="background-image:url(<?php echo base_url(); ?>asset/images/telephone1.jpg)"></div>
+                                            <div class="item" style="background-image:url(<?php echo base_url(); ?>asset/images/telephone2.png)"></div>
+                                            <div class="item" style="background-image:url(<?php echo base_url(); ?>asset/images/telephone3.jpg)"></div>  
+                                          </div>
+                                        </div>
+                                    </div>
+                                
                                     <div class="intro">
-                                    <div class="intro-sub">BIENVENU SUR</div>
-                                    <h1><small>CAMTELPLAN<span> Planification des permanences et des astreintes</small> </span></h1>
+                                    <!--<div class="intro-sub">BIENVENUE SUR</div>-->
+                                    <h1><small>CAMTELPLAN: <span> Planification des permanences et des astreintes</small> </span></h1>
                                     <?php if($error!=null) echo'<div class="alert alert-dismissable alert-danger">Veuillez renseigner un mot clé et une ville SVP! Ces champs sont obligatoires pour une bonne recherche</div>'; ?>
                                     <form class="form-horizontal form-label-left input_mask" method="POST" action="<?php echo base_url(); ?>utilisateur/filtre1">
 
@@ -99,10 +111,10 @@
                                     <img src="<?php echo base_url(); ?>asset/images/calendrier.jpg" class="img-circle img-responsive" alt="" /></div>
                                 <div class="col-xs-10 col-md-10">
                                     <div>
-                                        <a >
-                                            Consultez le planning de permanence du personnel de CAMTEL</a>
+                                        <a href="#">
+                                            Concevez des plannings de permanences et des astreintes an toute aisance et convivialité</a>
                                         <div class="mic-info">
-                                            Où que vous soyez, qui que vous soyez, consultez les calendriers de permanence
+                                            Où que vous soyez, faites des programmations avec CAMTELPLAN...
                                         </div>
                                     </div>
                                     
@@ -122,9 +134,9 @@
                                 <div class="col-xs-10 col-md-10">
                                     <div>
                                         <a >
-                                            Consultez le planning de permanence du personnel de CAMTEL</a>
+                                            Savoir à tout moment qui joindre, qui consulter...</a>
                                         <div class="mic-info">
-                                            Où que vous soyez, qui que vous soyez, consultez les calendriers de permanence
+                                            Où que vous soyez, qui que vous soyez, accédez à CAMTELPLAN pour savoir se que vous souhaitez savoir en terme de planning de permanence...
                                         </div>
                                     </div>
                                     
@@ -609,6 +621,13 @@
                 
                 $('#SupprPerm').modal('show'); 
             });
+        </script>
+        
+        <script type="text/javascript">
+            $('#myCarousel').carousel({
+		//pause: 'none'
+                interval: 7000;
+            })
         </script>
         
     </body>

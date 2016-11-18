@@ -49,81 +49,59 @@
 
             
 		
-		<div class="row">
-                
-                <div id="my_carousel" class="carousel slide" data-ride="carousel">
-                <!-- Bulles -->
-                <ol class="carousel-indicators">
-                <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#my_carousel" data-slide-to="1"></li>
-                <li data-target="#my_carousel" data-slide-to="2"></li>
-                </ol>
-                <!-- Slides -->
-                <div class="carousel-inner">
-                <?php include('carousel.php'); ?> 
-                <!-- Contr�les -->
-                <a class="left carousel-control" href="#my_carousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#my_carousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-                </div>
-                </div>
-            </div>
-			
-    <nav class="navbar navbar-findcond navbar-fixed-top">
-        
-    <div class="container">
-            <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                            <h4>GESTION DES PLANNINGS</h4>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <form class="form-horizontal form-label-left input_mask" method="POST" action="<?php echo base_url(); ?>utilisateur/filtre1">
-
-                            <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
-                                <input type="text" class="form-control" name="mc" id="autocomplete-custom-append" placeholder="Mot clé (Ex: Fibre Optique, réseau, internet)" style="float: left; height:60px;" required=""/>
-                                <div id="autocomplete-container" style="position: relative; float: left; width: 400px; margin: 10px;"></div>
-                            </div>
-
-                            <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
-                                <input type="text" class="form-control" name="ville" id="autocomplete-custom-append2" placeholder="Où? (Ex: Yaoundé)" style="height:60px;" required>
-                                <!--<span class="fa fa-user fa-5x form-control-feedback right" aria-hidden="true"></span>-->
-                                <div id="autocomplete-container2" style="position: relative; float: left; width: 400px; margin: 10px;"></div>
-                            </div>
-
-                            <div class="col-md-1 col-sm-6 col-xs-6 form-group has-feedback" >
-                            <button type="submit" class="btn btn-warning fa fa-search fa-2x" style="height:60px; width:80px"></button>
-
-                            </div>
-
-                           
-                         </form>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <div class="collapse navbar-collapse" id="navbar">
-                                
-                    <ul class="nav navbar-nav navbar-right">
-                           
-                            <li class="active">
-                                    <a href="<?php echo base_url(); ?>utilisateur/resultat_recherche" aria-expanded="false"><i class="fa fa-fw fa-home fa-2x"></i> Accueil <span class="badge"><?php //echo $size_perm; ?></span></a> 
-                            </li>
-                            
-                    </ul>
-
-            </div>
-                    </div>
-            </div>
-    </div>
-
-</nav>
-
-           
 		
+			
+    <!--<nav class="navbar navbar-findcond navbar-fixed-top">
+        
+    
+    </nav>-->
+
             <!-- page content -->
             <div class="right_col" role="main">
-			<div class="">
+                    <div class="">
+                    <hr/>
+                    <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <h4>GESTION DES PLANNINGS</h4>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <form class="form-horizontal form-label-left input_mask" method="POST" action="<?php echo base_url(); ?>utilisateur/filtre1">
+
+                                    <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control" name="mc" id="autocomplete-custom-append" placeholder="Mot clé (Ex: Fibre Optique, réseau, internet)" style="float: left; height:60px;" required=""/>
+                                        <div id="autocomplete-container" style="position: absolute; float: left; width: 400px; margin: 10px;"></div>
+                                    </div>
+
+                                    <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
+                                        <input type="text" class="form-control" name="ville" id="autocomplete-custom-append2" placeholder="Où? (Ex: Yaoundé)" style="height:60px;" required>
+                                        <!--<span class="fa fa-user fa-5x form-control-feedback right" aria-hidden="true"></span>-->
+                                        <div id="autocomplete-container2" style="position: absolute; float: left; width: 400px; margin: 10px;"></div>
+                                    </div>
+
+                                    <div class="col-md-1 col-sm-6 col-xs-6 form-group has-feedback" >
+                                    <button type="submit" class="btn btn-warning fa fa-search fa-2x" style="height:60px; width:80px"></button>
+
+                                    </div>
+
+
+                                 </form>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="collapse navbar-collapse" id="navbar">
+
+                                        <ul class="nav navbar-nav navbar-right">
+
+                                                <li class="active">
+                                                        <a href="<?php echo base_url(); ?>utilisateur/index" aria-expanded="false"><i class="fa fa-fw fa-home fa-2x"></i> Accueil <span class="badge"><?php //echo $size_perm; ?></span></a> 
+                                                </li>
+
+                                        </ul>
+
+                                    </div>
+                            </div>
+                        
+                    </div>
+                    <hr/>
                     
                     <div class="clearfix"></div>
 

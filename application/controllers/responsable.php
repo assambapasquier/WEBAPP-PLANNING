@@ -381,6 +381,59 @@ class responsable extends CI_Controller{
         }
     }
     
+    public function rapports(){
+        if(!$this->is_logged()){
+            $this->sign_in();
+        }
+        else{
+            $this->chargerSession();
+            $this->chargerContext($this->data['service'], $this->data['departement'], $this->data['direction'], $this->data['matricule'], $this->data['mot_de_passe']);
+            
+            $this->chargerPersonnels($this->data['service'], $this->data['departement'], $this->data['direction']);
+            $this->chargerServices($this->data['service'], $this->data['departement'], $this->data['direction']);
+            $this->chargerDepartements($this->data['service'], $this->data['departement'], $this->data['direction']);
+            $this->data['size_perso'] = sizeof($this->data['perso']);
+            //$this->data['perm'] = $permanences;
+            //$this->data['size_perm'] = sizeof($this->data['perm']);
+        
+            $this->load->view('rapports_jours', $this->data);
+           
+        }     
+    }
+    
+    public function filtre1(){
+        $this->form_validation->set_error_delimiters('<p style="color:red;">', '</p>');
+        
+        $this->load->library('form_validation'); //pour la validation du formulaire
+        //$this->form_validation->set_error_delimiters('<p class="form_erreur">', '</p>');
+        //$this->form_validation->set_rules('service','"Mot Cle"','required|encode_php_tags');
+        $this->form_validation->set_rules('perso','"Ville"','required|encode_php_tags');
+        if($this->form_validation->run()){
+            //$service = $this->input->post('service');
+            $perso = $this->input->post('perso');
+            $this->chargerTaches($perso);
+            
+            redirect('responsable/rapports', 'refresh');
+            
+        }
+        else{
+            //echo'<div class="alert alert-dismissable alert-danger"><small>'. validation_errors().'</small></div>';
+            $this->index($error="error");
+        }
+    }
+    protected function chargerTaches($matricule){
+        $taches[] = array();
+        $result2 = $this->taches_model->get(array('matricule'=>$matricule));
+        $taille = 0;
+        foreach ($result2 as $row2){
+               $taches[$taille] = array('id'=>$row2->id, 'libelle'=>$row2->libelle, 'description'=>$row2->description,
+                      'statut'=>$row2->statut, 'date_tache'=>$row2->date_tache);
+               $taille = $taille+1;  
+        }
+        $this->data['taches'] = $taches;
+        
+    }
+    
     
     private function sign_in(){
         $type = array('error' => 0, 'resp'=>'responsable');

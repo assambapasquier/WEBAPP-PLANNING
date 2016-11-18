@@ -51,25 +51,7 @@
 		
 		<div class="row">
                 
-                <div id="my_carousel" class="carousel slide" data-ride="carousel">
-                <!-- Bulles -->
-                <ol class="carousel-indicators">
-                <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#my_carousel" data-slide-to="1"></li>
-                <li data-target="#my_carousel" data-slide-to="2"></li>
-                </ol>
-                <!-- Slides -->
-                <div class="carousel-inner">
-                <?php //include('utils/carousel.php'); ?> 
-                <!-- Contr�les -->
-                <a class="left carousel-control" href="#my_carousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#my_carousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-                </div>
-            </div>
+                
 			
     <nav class="navbar navbar-findcond navbar-fixed-top">
         
@@ -103,15 +85,15 @@
                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <div class="collapse navbar-collapse" id="navbar">
 
-                        <ul class="nav navbar-nav navbar-right">
+                                        <ul class="nav navbar-nav navbar-right">
 
-                                <li class="active">
-                                        <a href="<?php echo base_url(); ?>utilisateur/resultat_recherche" aria-expanded="false"><i class="fa fa-fw fa-home fa-2x"></i> Accueil <span class="badge"><?php //echo $size_perm; ?></span></a> 
-                                </li>
+                                                <li class="active">
+                                                        <a href="<?php echo base_url(); ?>utilisateur/resultat_recherche" aria-expanded="false"><i class="fa fa-fw fa-home fa-2x"></i> Accueil <span class="badge"><?php //echo $size_perm; ?></span></a> 
+                                                </li>
 
-                        </ul>
+                                        </ul>
 
-                </div>
+                                </div>
                         </div>
                 </div>
         </div>

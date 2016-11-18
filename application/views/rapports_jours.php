@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>CAMPLAN | Accueil_r </title>
+    <title>CAMPLAN | Rapports Journaliers </title>
 
     <!-- Bootstrap core CSS -->
 
@@ -50,79 +50,63 @@
             
 		
 		
+			
     <nav class="navbar navbar-findcond navbar-fixed-top">
         
-    <div class="container">
-            <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <h4>GESTION DES PLANNINGS</h4>
-                    </div>
+        <div class="container">
+                <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                <h4>GESTION DES PLANNINGS</h4>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <form class="form-horizontal form-label-left input_mask" method="POST" action="<?php echo base_url(); ?>responsable/filtre1">
 
-                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                            <div class="collapse navbar-collapse" id="navbar">
-                    <ul class="nav navbar-nav navbar-right">
-                            <li class="active">
-                                    <a href="<?php echo base_url(); ?>responsable/accueil_r" aria-expanded="false"><i class="fa fa-fw fa-home"></i> Accueil <span class="badge"><?php //echo $size_perso; ?></span></a>
-                                    <!--<ul class="dropdown-menu" role="menu">
-                                            <li><a href="#"><i class="fa fa-fw fa-tag"></i> <span class="badge">Music</span> sayfasi <span class="badge">Video</span> sayfasinda etiketlendi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Music</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Video</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Game</span> sayfasinda iletiniz begenildi</a></li>
-                                    </ul>-->
-                            </li>
-                            
-                            <li>
-                                    <a href="<?php echo base_url(); ?>responsable/accueil_r" aria-expanded="false"><i class="fa fa-fw fa-calendar"></i> Permanences <span class="badge"><?php echo $size_perm; ?></span></a>
-                                    <!--<ul class="dropdown-menu" role="menu">
-                                            <li><a href="#"><i class="fa fa-fw fa-tag"></i> <span class="badge">Music</span> sayfasi <span class="badge">Video</span> sayfasinda etiketlendi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Music</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Video</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Game</span> sayfasinda iletiniz begenildi</a></li>
-                                    </ul>-->
-                            </li>
-                            
-                            <li>
-                                    <a href="<?php echo base_url(); ?>responsable/astreintes" aria-expanded="false"><i class="fa fa-fw fa-calendar"></i> Astreintes <span class="badge"><?php //echo $size_as; ?></span></a>
-                                    <!--<ul class="dropdown-menu" role="menu">
-                                            <li><a href="#"><i class="fa fa-fw fa-tag"></i> <span class="badge">Music</span> sayfasi <span class="badge">Video</span> sayfasinda etiketlendi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Music</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Video</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Game</span> sayfasinda iletiniz begenildi</a></li>
-                                    </ul>-->
-                            </li>
-                            
-                            <li>
-                                    <a href="<?php echo base_url(); ?>responsable/rapports" aria-expanded="false"><i class="fa fa-fw fa-calendar"></i> Rapports journailiers <span class="badge"><?php //echo $size_as; ?></span></a>
-                                    <!--<ul class="dropdown-menu" role="menu">
-                                            <li><a href="#"><i class="fa fa-fw fa-tag"></i> <span class="badge">Music</span> sayfasi <span class="badge">Video</span> sayfasinda etiketlendi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Music</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Video</span> sayfasinda iletiniz begenildi</a></li>
-                                            <li><a href="#"><i class="fa fa-fw fa-thumbs-o-up"></i> <span class="badge">Game</span> sayfasinda iletiniz begenildi</a></li>
-                                    </ul>-->
-                            </li>
-                            
-                            <li>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-user"></i> Bienvenu <?php echo 'M. '.$context['nom']; ?>! <span class="badge"><?php echo $context['role'].' '.$context['structure']; ?> </span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                            <li><a href="<?php echo base_url(); ?>responsable/deconnexion"><i class="fa fa-fw fa-sign-out"></i> Deconnexion </a></li>
-                                    </ul>
-                            </li>
-                            <!--<li class="active"><a href="#">Ana Sayfa <span class="sr-only">(current)</span></a></li>
-                            <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Geri bildirim</a></li>
-                                            <li><a href="#">Yardim</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Ayarlar</a></li>
-                                            <li><a href="#exit">�ikis yap</a></li>
-                                    </ul>
-                            </li>-->
-                    </ul>
+                                <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <select name="service" class="form-control">
+                                        <?php
+                                            foreach($services as $v){
+                                                if($v != null){
+                                                    echo '<option value="'.$v['id'].'">'.$v['nom_service'].'</option>';
+                                                }
+                                            }//en foreach
+                                        ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-5 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <select name="perso" class="form-control">
+                                        <?php
+                                            foreach($perso as $v){
+                                                if($v != null){
+                                                    echo '<option value="'.$v['matricule'].'">'.$v['nom'].'</option>';
+                                                }
+                                            }//en foreach
+                                        ?>
+                                    </select>
+                                </div>
 
-            </div>
-                    </div>
-            </div>
+                                <div class="col-md-1 col-sm-6 col-xs-6 form-group has-feedback" >
+                                    <button type="submit" class="btn btn-warning fa fa-search fa-1x"></button>
+                                </div>
+
+
+                             </form>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="collapse navbar-collapse" id="navbar">
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                                <li class="active">
+                                        <a href="<?php echo base_url(); ?>responsable/accueil" aria-expanded="false"><i class="fa fa-fw fa-home fa-2x"></i> Accueil <span class="badge"><?php //echo $size_perm; ?></span></a> 
+                                </li>
+
+                        </ul>
+
+                </div>
+                        </div>
+                </div>
+        </div>
     </div>
 
 </nav>
@@ -135,47 +119,38 @@
                     
                     <div class="clearfix"></div>
 
-                    <div class="row" style="margin-top:90px;">
+                    <div class="row" style="margin-top: 125px;">
 
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                               <div class="x_panel">
                                 <div class="x_title">
-
-                                    <h2>Liste du personnel de "<?php echo $context['structure']; ?>"</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        <!--<a href="#"><button type="button" class="fa fa-plus fa-2x btn btn-primary">&nbsp;Nouveau Personnel</button></a>-->
-
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                        <?php 
+                                            if(isset($nom_personnel)){
+                                                echo '<h3><span style="color:rgb(0,162,232);">Rapports journalier de M. "';
+                                                echo $nom_personnel;
+                                                echo '</span></h3>';
+                                            }
+                                            else{
+                                                echo '<h3><span style="color:rgb(0,162,232);">Aucun personnel choisi</span></h3> ';
+                                            }
+                                        ?>
+                                        
+                                    </div>
+                                    
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                <?php include('tableaux/table_personnels.php'); ?>
+                                    <div class="row">
+                                        <form method="POST" action="<?php echo base_url()?>responsable/ajouter_rapport">
+                                            
+                                        </form>
+                                    </div>
+                                    
                                 </div>
                               </div>
                             </div>
-                       
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="x_panel">
-                               
-                                    <div class="x_title">
-
-                                        <h2>Liste des  permanences de "<?php echo $context['structure']; ?>"</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <button type="button" data-toggle="modal" data-target="#NewPerm" class="fa fa-plus btn btn-primary">&nbsp;Nouvelle Permanence</button>
-
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="x_content">
-                                    <?php 
-                                        include('tableaux/tableau_permanences.php'); 
-                                    ?>
-                                    </div>
-                                
-                            </div>
-                        </div>
                         
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                           <a href="<?php echo base_url(); ?>responsable/astreintes"><button type="button" class="fa fa-eye fa-2x btn btn-warning">Consulter les astreintes</button></a> 
-                        </div>
-                        
-                        <br />
                         <br />
                         <br />
 
@@ -194,106 +169,7 @@
                 <!-- /footer content -->
             </div>
 			
-			<div class="modal fade info_perso" tabindex="-1" role="dialog" aria-hidden="true">
-				<div class="modal-dialog modal-sm">
-					<div class="modal-content">
-
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel2">Informations du personnel</h4>
-						</div>
-						<div class="modal-body">
-							<h4>Aucune pour le moment</h4>
-							<p></p>
-							<p></p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-							<!--<button type="button" class="btn btn-primary">Save changes</button>-->
-						</div>
-
-					</div>
-				</div>
-			</div>
                 
-                <div id="NewPerm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title" id="myModalLabel"><span style="color:rgb(0,132,232);"> Ajout d'une permanence</span></h4>
-                            </div>
-
-                            <div class="modal-body">
-                                <?php 
-                                    include('form/ajout_perm.php'); 
-                                    /*switch($context['indicatif']){
-                                        case "departement": include('form/ajout_perm_cd.php'); 
-                                            break; 
-                                        case "service": include('form/ajout_perm_cs.php'); 
-                                            break; 
-                                        case "direction": include('form/ajout_perm_dir.php'); 
-                                            break; 
-                                        default:echo 'error';
-                                    }*/
-                                ?>
-                                <div class="modal-footer">
-                                   <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Fermer</button>
-
-                               </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="UpdatePerm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title" id="myModalLabel"><span style="color:rgb(0,132,232);"> Modification d'une permanence</span></h4>
-                            </div>
-
-                            <div class="modal-body">
-                                <?php 
-                                    include('form/update_perm.php');   
-                                ?>
-                                <div class="modal-footer">
-                                   <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Fermer</button>
-
-                               </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="SupprPerm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h4 class="modal-title" id="myModalLabel"><span style="color:rgb(0,132,232);"> Voulez-vous vraiment supprimer?</span></h4>
-                            </div>
-
-                            <div class="modal-body">
-                                <?php 
-                                    include('form/suppr_perm.php');   
-                                ?>
-                                <div class="modal-footer">
-                                   <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Fermer</button>
-
-                               </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             <!-- /page content -->
 
     <!--<div id="custom_notifications" class="custom-notifications dsp_none">
@@ -333,12 +209,14 @@
             autosize($('.resizable_textarea'));
         </script>
         <!-- Autocomplete -->
-        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/autocomplete/countries.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/autocomplete/villes.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/autocomplete/keyword.js"></script>
+        <!--<script type="text/javascript" src="<?php //echo base_url(); ?>asset/js/autocomplete/countries.js"></script>-->
         <script src="<?php echo base_url(); ?>asset/js/autocomplete/jquery.autocomplete.js"></script>
         <script type="text/javascript">
             $(function () {
                 'use strict';
-                var countriesArray = $.map(countries, function (value, key) {
+                var keywordArray = $.map(keywords, function (value, key) {
                     return {
                         value: value,
                         data: key
@@ -346,8 +224,25 @@
                 });
                 // Initialize autocomplete with custom appendTo:
                 $('#autocomplete-custom-append').autocomplete({
-                    lookup: countriesArray,
+                    lookup: keywordArray,
                     appendTo: '#autocomplete-container'
+                });
+            });
+        </script>
+        
+        <script type="text/javascript">
+            $(function () {
+                'use strict';
+                var villesArray = $.map(villes, function (value, key) {
+                    return {
+                        value: value,
+                        data: key
+                    };
+                });
+                // Initialize autocomplete with custom appendTo:
+                $('#autocomplete-custom-append2').autocomplete({
+                    lookup: villesArray,
+                    appendTo: '#autocomplete-container2'
                 });
             });
         </script>
@@ -516,7 +411,7 @@
             $(document).ready(function () {
                 var oTable = $('#example').dataTable({
                     "oLanguage": {
-                        "sSearch": "Filtrer:"
+                        "sSearch": "Rechercher un nom:"
                     },
                     "aoColumnDefs": [
                         {
@@ -603,6 +498,30 @@
                 $(".lib").val(libelle);
                 
                 $('#SupprPerm').modal('show'); 
+            });
+        </script>
+        
+        <!--------------------------------------COMMENT AVOIR LA VALEUR D'UNE LIGNE DE TABLE SELECTIONNEE---------------------->
+        <script>
+            $('.viewbtn').click(function(){
+                var row = $(this).closest('tr');
+                    cells = row.find('td');
+                    nom = cells.eq(2).html();
+                    tel = cells.eq(5).html();
+                    email = cells.eq(6).html();
+                    //$(e.currentTarget).find('input[name="bookId"]').val(bookId);
+                    $("#nom").val(nom);
+                    $("#tel").val(tel);
+                    $("#email").val(email);
+                    $('.info_perso').modal('show'); 
+            });
+        </script>
+        
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#intervalle').daterangepicker(null, function (start, end, label) {
+                    console.log(start.toISOString(), end.toISOString(), label);
+                });
             });
         </script>
         

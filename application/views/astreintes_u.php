@@ -49,27 +49,7 @@
 
             
 		
-		<div class="row">
-                
-                <div id="my_carousel" class="carousel slide" data-ride="carousel">
-                <!-- Bulles -->
-                <ol class="carousel-indicators">
-                <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
-                <li data-target="#my_carousel" data-slide-to="1"></li>
-                <li data-target="#my_carousel" data-slide-to="2"></li>
-                </ol>
-                <!-- Slides -->
-                <div class="carousel-inner">
-                <?php //include('utils/carousel.php'); ?> 
-                <!-- Contr�les -->
-                <a class="left carousel-control" href="#my_carousel" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#my_carousel" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-                </div>
-            </div>
+		
 			
     <nav class="navbar navbar-findcond navbar-fixed-top">
         
